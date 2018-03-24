@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax 1 -Text file</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style media="screen">
+        #button{
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container text-center">
+        <button type="button" name="button" id="button" class="btn btn-dark">Get text file</button>
+    </div> <br/><br/>
+    <div id="text"></div>
+    <script type="text/javascript">
+    //event listener.
+    document.getElementById('button').addEventListener('click',loadText);
+    function loadText(){
+        
+      
+        //create XHR object.
+        var xhr = new XMLHttpRequest();
+        //open -type,url/file,async
+        
+        xhr.onprogress = function(){
+            console.log('readystate 1:', xhr.readystate);
+        }
+        xhr.open('GET','sample.txt',true);
+
+
+        xhr.onprogress = function(){
+            console.log('readystate 2:', xhr.readystate);
+        }
+        xhr.onload = function(){
+            
+        xhr.onprogress = function(){
+            console.log('readystate 3:', xhr.readystate);
+        }
+            if(xhr.status == 200){
+            document.getElementById('text').innerHTML = this.responseText;
+            }
+            else if(xhr.status ==404){
+            document.getElementById('text').innerHTML = "NOT FOUND";
+            }
+        }
+
+        xhr.send();
+
+
+    }
+//readystate values
+//0: req not initialized
+//1: server connection stablished
+//2: req received
+//3: processing req
+//4: req finished and response is ready
+
+
+
+//http status:
+//200: "ok"
+//403: "forbidden"
+//404: "not found"
+    </script>
+
+    
+</body>
+</html>
